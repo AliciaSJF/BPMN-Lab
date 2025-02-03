@@ -1,0 +1,41 @@
+### Descripción del Proceso: Envío de mercancías en una tienda de hardware de computadoras
+
+#### 1. Contexto del Proceso
+El proceso descrito en el XML representa la logística de envío de mercancías desde una tienda de hardware de computadoras. La tienda se encarga de enviar productos a clientes finales y, ocasionalmente, a otras tiendas. Los participantes del proceso son el "Secretario", el "Logística" y el "Almacén".
+
+#### 2. Flujo de Actividades en Orden Cronológico
+- **Inicio del Proceso (StartEvent_1)**: El proceso se inicia con el evento de "Enviar mercancías".
+- **Clarificación del Método de Envío (Task_0vaxgaa)**: El Secretario debe aclarar cuál será el método de envío.
+- **Decisión sobre Manejo Especial (ExclusiveGateway_1mpgzhg)**: El Secretario decide si el envío requiere manejo especial.
+  - **Si No (SequenceFlow_0iu9po7)**: Si el envío no requiere manejo especial, el flujo progresa a la siguiente actividad, donde se escribe la etiqueta del paquete.
+  - **Si Sí (SequenceFlow_1xv6wk4)**: Si se requiere manejo especial, el flujo lleva al Secretario a obtener tres ofertas de empresas logísticas.
+- **Obtener Ofertas (Task_0e6hvnj)**: El Secretario contacta a tres empresas logísticas para obtener ofertas de envío.
+- **Seleccionar Empresa y Hacer Pedido (Task_0s79ile)**: Después de recibir las ofertas, el Secretario selecciona una empresa logística adecuada y coloca el pedido.
+- **Escribir Etiqueta del Paquete (Task_0jsoxba)**: Independientemente de la decisión sobre el manejo especial, se escribe la etiqueta del paquete.
+- **Decisión sobre Seguro (InclusiveGateway_0p2e5vq)**: 
+  - Si se necesita un seguro (SequenceFlow_1j94oja), se asegura el paquete.
+  - Caso contrario, se continúa directamente a empaquetar.
+- **Asegurar Paquete (Task_12j0pib)**: Si es necesario asegurarlo, se completa dicha tarea antes de proceder.
+- **Empacar Bienes (Task_05ftug5)**: Se realiza la actividad de empaquetar los bienes.
+- **Preparar para Recogida (Task_0sl26uo)**: Finalmente, los bienes se preparan para ser recogidos por la empresa logística.
+- **Fin del Proceso (EndEvent_1fx9yp3)**: El proceso concluye con el evento "Envío preparado", indicando que la mercancía está lista para su recolección.
+
+#### 3. Decisiones en el Proceso
+- **Gateway Exclusivo (ExclusiveGateway_1mpgzhg)**: Se evalúa si se requiere manejo especial. Las opciones resultantes son:
+  - No hay manejo especial y se sigue con la escritura de la etiqueta del paquete.
+  - Se requiere manejo especial, lo que lleva a obtener ofertas logísticas.
+  
+- **Gateway Inclusivo (InclusiveGateway_0p2e5vq)**: En el flujo se evalúa si se necesita seguro. Dependiendo de la decisión, se:
+  - Asegura el paquete o se avanza a empaquetar.
+
+#### 4. Actores Involucrados
+- **Secretario**: Responsable de coordinar el envío, aclarar el método de envío, seleccionar la empresa logística, gestionar ofertas y preparar la documentación del envío.
+- **Logística**: Asume responsabilidades en la gestión de la entrega y el manejo especial si es necesario.
+- **Almacén**: Participa en el empaquetado y preparación de los bienes para la recogida.
+
+#### 5. Información sobre Paralelismo o Sincronización
+- **Gateway Paralelo (ParallelGateway_02fgrfq)**: Tras el inicio del proceso, el flujo de actividades se lleva a cabo en paralelo en dos rutas:
+  - El Secretario trabaja en clarificar el método de envío (Task_0vaxgaa) y en el empaquetado de bienes (Task_05ftug5). Ambas actividades se ejecutan simultáneamente.
+
+#### 6. Contexto del Negocio
+Este proceso se desarrolla dentro de una pequeña tienda de hardware de computadoras que distribuye mercancías tanto a clientes individuales como a otras tiendas. La logística de envío es fundamental para asegurar que los bienes lleguen a tiempo y en condiciones adecuadas, reflejando la importancia de la satisfacción del cliente y la gestión efectiva de la cadena de suministro. Las decisiones tomadas durante el proceso, como el manejo especial o el uso de seguros, reflejan los niveles variados de atención y cuidado requeridos para diferentes tipos de envíos.
